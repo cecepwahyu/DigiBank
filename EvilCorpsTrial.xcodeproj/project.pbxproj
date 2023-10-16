@@ -11,6 +11,10 @@
 		784FA2492AD7A613006C2DA4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784FA2482AD7A613006C2DA4 /* ContentView.swift */; };
 		784FA24B2AD7A615006C2DA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 784FA24A2AD7A615006C2DA4 /* Assets.xcassets */; };
 		784FA24E2AD7A615006C2DA4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 784FA24D2AD7A615006C2DA4 /* Preview Assets.xcassets */; };
+		7899E8732ADCF029006519CA /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7899E8722ADCF029006519CA /* Poppins-Regular.ttf */; };
+		7899E8762ADCF562006519CA /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7899E8752ADCF562006519CA /* Poppins-Bold.ttf */; };
+		7899E87A2ADCF6E8006519CA /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7899E8792ADCF6E8006519CA /* Poppins-Bold.ttf */; };
+		7899E87C2ADCF761006519CA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7899E87B2ADCF761006519CA /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		784FA2482AD7A613006C2DA4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		784FA24A2AD7A615006C2DA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		784FA24D2AD7A615006C2DA4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7899E8722ADCF029006519CA /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		7899E8752ADCF562006519CA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		7899E8792ADCF6E8006519CA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		7899E87B2ADCF761006519CA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,9 @@
 		784FA2452AD7A613006C2DA4 /* EvilCorpsTrial */ = {
 			isa = PBXGroup;
 			children = (
+				7899E87B2ADCF761006519CA /* Roboto-Regular.ttf */,
+				7899E8792ADCF6E8006519CA /* Poppins-Bold.ttf */,
+				7899E8722ADCF029006519CA /* Poppins-Regular.ttf */,
 				784FA2462AD7A613006C2DA4 /* EvilCorpsTrialApp.swift */,
 				784FA2482AD7A613006C2DA4 /* ContentView.swift */,
 				784FA24A2AD7A615006C2DA4 /* Assets.xcassets */,
@@ -62,6 +73,7 @@
 		784FA24C2AD7A615006C2DA4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				7899E8752ADCF562006519CA /* Poppins-Bold.ttf */,
 				784FA24D2AD7A615006C2DA4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -125,8 +137,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7899E87C2ADCF761006519CA /* Roboto-Regular.ttf in Resources */,
+				7899E8732ADCF029006519CA /* Poppins-Regular.ttf in Resources */,
 				784FA24E2AD7A615006C2DA4 /* Preview Assets.xcassets in Resources */,
+				7899E87A2ADCF6E8006519CA /* Poppins-Bold.ttf in Resources */,
 				784FA24B2AD7A615006C2DA4 /* Assets.xcassets in Resources */,
+				7899E8762ADCF562006519CA /* Poppins-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +290,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"EvilCorpsTrial/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EvilCorpsTrial/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -302,6 +319,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"EvilCorpsTrial/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EvilCorpsTrial/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

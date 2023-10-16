@@ -23,11 +23,12 @@ struct ContentView: View {
 //            return AnyView(CreateAccount())
 //        }
         //Login()
-        //CreateAccount()
-        Confirmation()
+        CreateAccount()
+        //Confirmation()
     }
 }
 
+//Create show/hide Password Toggle Button
 struct SecureTextField: View {
     
     @State private var isSecureField: Bool = true
@@ -37,35 +38,38 @@ struct SecureTextField: View {
         HStack {
             if isSecureField {
                 SecureField("Password", text: $text)
+                    .font(Font.custom("Poppins-Regular", size: 14))
             } else {
-                TextField(text, text: $text)
+                TextField("Password"/*text*/, text: $text)
+                    .font(Font.custom("Poppins-Regular", size: 14))
             }
         }.overlay(alignment: .trailing) {
-                Image(systemName: isSecureField ? "eye.slash": "eye")
+                Image(systemName: isSecureField ? "eye.slash.fill": "eye.fill")
                     .onTapGesture {
                         isSecureField.toggle()
                     }
+                    .foregroundColor(ButtonColor)
             }
         }
     }
 
+//Create number only field input
+class NumbersOnly: ObservableObject {
+    @Published var value = "" {
+        didSet {
+            let filtered = value.filter { $0.isNumber }
+            if value != filtered {
+                value = filtered
+            }
+        }
+    }
+}
+
 struct Login: View {
     
-    //@EnvironmentObject var userAuth : AuthUser
     
     @State var username : String = ""
     @State var password : String = ""
-    
-//    func cekLogin() {
-//        if(username == "Admin" && password == "123") {
-//            userAuth.isLoggedin = true
-//        } else {
-//            userAuth.isLoggedin = false
-//            userAuth.isCorrect = false
-//        }
-//    }
-    
-    let lightGreyColor = Color(red : 239.0/255.0, green: 243.0/255.0, blue: 244.0/255/0, opacity: 1.0)
     
     var body: some View {
         ZStack {
@@ -76,11 +80,11 @@ struct Login: View {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 164)
+                    .frame(width: 164, height: 132)
                     .foregroundColor(ButtonColor)
                 ZStack {
                     Rectangle()
-                        .frame(height: 500)
+                        .frame(width: 346,height: 497)
                         .foregroundColor(Kedua)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .padding()
@@ -88,53 +92,60 @@ struct Login: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Masuk")
-                                .font(.title2)
-                                //.padding(.bottom, 5)
+                                .bold()
+                                .font(Font.custom("Poppins-Bold", size: 20))
+                                .padding(.top, 40)
                         }
-                        //.padding()
                         
-                        Text("Silahkan memasukkan username dan password terdaftar anda untuk melakukan login")
-                            .font(.subheadline)
+                        Text("Silahkan memasukkan email dan kata sandi untuk masuk ke aplikasi")
+                            .font(Font.custom("Poppins-Regular", size: 12))
                             .foregroundColor(.secondary)
-                        .padding([.top, .bottom], 5)
+                            .padding(.bottom, 5)
                         
                         //Field Username
                         Text("Email \(Text("*").foregroundColor(.red)) :")
+                            .font(Font.custom("Poppins-Regular", size: 16))
                         
                         TextField("Email", text: $username)
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .padding()
-                            .background(lightGreyColor)
+                            .background(Utama)
                             .cornerRadius(5.0)
                         
                         //Field Password
                         Text("Kata Sandi \(Text("*").foregroundColor(.red)) :")
+                            .font(Font.custom("Poppins-Regular", size: 16))
             
-                        TextField("Kata Sandi", text: $password)
-                            .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                        ZStack {
+                            SecureTextField(text: $password)
+                                .padding()
+                                .background(Utama)
+                                .cornerRadius(5.0)
+                        }
+//                        TextField("Kata Sandi", text: $password)
+//                            .padding()
+//                            .background(Utama).cornerRadius(5.0)
                         
                         //Lupa Password Button
                         HStack {
                             Spacer()
                             Button(action: {}) {
                                 Text("Lupa Password ?")
-                                    .font(.callout)
+                                    .font(Font.custom("Poppins-Regular", size: 10))
                                     .foregroundColor(ButtonColor)
                                     .padding([.top, .bottom], 10)
                             }
                             
                         }
                         
-                        //tampilakn notif salah password/user
-//                        if(!userAuth.isCorrect) {
-//                            Text("username dan password salah!").foregroundColor(.red)
-//                        }
+                        Spacer()
                         
                         //Login Button
                         HStack {
                             Spacer()
                             Button(action: {}) {
                                 Text("Login")
+                                    .font(Font.custom("Poppins-Regular", size: 12))
                                     .bold()
                                     .foregroundColor(.white)
                             }
@@ -149,14 +160,17 @@ struct Login: View {
                         HStack {
                             Spacer()
                             Text("Belum punya akun?")
+                                .font(Font.custom("Poppins-Regular", size: 12))
                             
                             Button(action: {}) {
                                 Text("Daftar")
+                                    .font(Font.custom("Poppins-Regular", size: 12))
                                     .foregroundColor(ButtonColor)
                             }
                             Spacer()
                         }
                         .padding()
+                        .padding(.bottom, 20)
                         
                             
                     }
@@ -174,7 +188,7 @@ struct Login: View {
                     Spacer()
                 }
                 
-                Text("PT Bank Digi telah berlisensi oleh Bank Indonesia dan diawasi oleh Otoritas Jasa Keuangan (OJK) serta merupakan peserta dari Lembaga Penjamin Simpanan (LPS).").font(.system(size: 8)).multilineTextAlignment(.center).padding().foregroundColor(.secondary)
+                Text("PT Bank Digi telah berlisensi oleh Bank Indonesia dan diawasi oleh Otoritas Jasa Keuangan (OJK) serta merupakan peserta dari Lembaga Penjamin Simpanan (LPS).").font(Font.custom("Roboto-Regular", size: 8)).multilineTextAlignment(.center).padding(.top, 10).foregroundColor(.secondary)
             }
         }
     }
@@ -182,12 +196,14 @@ struct Login: View {
 
 struct CreateAccount : View {
     
-    @State var NIK : String = ""
+    @ObservedObject var NIK = NumbersOnly()
+    @State var Name : String = ""
+    @State var Phone : String = ""
+    @State var Email : String = ""
     @State var Password : String = ""
     @State private var isToggled: Bool = false
     @State private var isPasswordVisible = false
     
-    let lightGreyColor = Color(red : 239.0/255.0, green: 243.0/255.0, blue: 244.0/255/0, opacity: 1.0)
     
     var body: some View {
         ZStack {
@@ -219,7 +235,6 @@ struct CreateAccount : View {
                     Spacer()
                 }
                 
-                //.padding()
                 
                 ZStack {
                     VStack{
@@ -236,57 +251,53 @@ struct CreateAccount : View {
                     
                     VStack(alignment: .leading) {
                         Text("Informasi Data Diri")
-                            .font(.title2)
+                            .font(Font.custom("Poppins-Regular", size: 16))
                         Text("Masukkan informasik data diri untuk proses pembuatan akun.")
-                            .font(.subheadline)
+                            .font(Font.custom("Poppins-Regular", size: 12))
                             .foregroundColor(.secondary)
                         Divider()
-                        Text("NIK : ")
-                            
-                        TextField("NIK", text: $NIK)
+                            .padding(.bottom, 16)
+                        Text("NIK \(Text("*").foregroundColor(.red)) : ")
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                        TextField("NIK", text: $NIK.value)
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .keyboardType(.numberPad)
+                            .background(Utama).cornerRadius(5.0)
                         
                         Text("Nama Lengkap \(Text("*").foregroundColor(.red)) :")
-                        TextField("Nama Lengkap", text: $NIK)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                        TextField("Nama Lengkap", text: $Name)
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .background(Utama).cornerRadius(5.0)
                         
                         Text("No. Telepon \(Text("*").foregroundColor(.red)) :")
-                        TextField("No. Telepon", text: $NIK)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                        TextField("No. Telepon", text: $Phone)
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .background(Utama).cornerRadius(5.0)
                         
                         Text("Email \(Text("*").foregroundColor(.red)) :")
-                        TextField("Email", text: $NIK)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                        TextField("Email", text: $Email)
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .background(Utama).cornerRadius(5.0)
                         
     
                         //PASSWORD
                         
                         Text("Password \(Text("*").foregroundColor(.red)) :")
+                            .font(Font.custom("Poppins-Regular", size: 14))
                         ZStack {
-                            TextField("Password", text: $Password)
+                            SecureTextField(text: $Password)
                                 .padding()
-                                .background(lightGreyColor)
+                                .background(Utama)
                                 .cornerRadius(5.0)
-                                //.isSecureTextEntry(!isToggled)
-                            
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                            self.isToggled.toggle() // Toggle the state when the button is pressed
-                                }) {
-                                    Image(systemName: isToggled ? "eye.slash" : "eye")
-                                        .bold()
-                                        .foregroundColor(ButtonColor)
-                                        .padding()
-                                }
-                            }
-                            
                         }
-                        
+                        Spacer()
                     }
                     .padding()
                 }
@@ -300,6 +311,7 @@ struct CreateAccount : View {
                             
                         
                         Text("Lanjut")
+                            .font(Font.custom("Poppins-Regular", size: 14))
                             .foregroundColor(.white)
                             .bold()
                     }
@@ -316,10 +328,10 @@ struct CreateAccount : View {
 
 struct Confirmation : View {
     
-    @State var NIK : String = ""
-    @State var Rekening : String = ""
-    
-    let lightGreyColor = Color(red : 239.0/255.0, green: 243.0/255.0, blue: 244.0/255/0, opacity: 1.0)
+    //@State var NIK : String = ""
+    @ObservedObject var NIK = NumbersOnly()
+    @ObservedObject var Rekening = NumbersOnly()
+    //@State var Rekening : String = ""
     
     var body: some View {
         ZStack {
@@ -346,7 +358,7 @@ struct Confirmation : View {
                     .padding()
                     
                     Text("Rekening")
-                        .font(.title2)
+                        .font(Font.custom("Poppins-Regular", size: 20))
                         .bold()
                         .frame(maxWidth: .infinity)
                 }
@@ -355,11 +367,10 @@ struct Confirmation : View {
                 ZStack {
                     VStack() {
                         Rectangle()
-                            .frame(height: 600)
+                            .frame(height: 601)
                             .foregroundColor(Kedua)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                             .padding([.leading, .trailing], 15)
-                            //.shadow(radius: 10)
                             
                         Spacer()
                         Spacer()
@@ -368,24 +379,29 @@ struct Confirmation : View {
                     
                     VStack(alignment: .leading) {
                         Text("Data akun")
-                            .font(.title2)
+                            .font(Font.custom("Poppins-Regular", size: 16))
                             .padding(.top, 25)
                         Text("Masukkan informasi mengenai NIK dan Nomor Rekening yang sudah ada.")
-                            .font(.subheadline)
+                            .font(Font.custom("Poppins-Regular", size: 12))
                             .foregroundColor(.secondary)
-                            .padding([.top, .bottom], 2)
+                            .padding(.bottom, 10)
                         Divider()
                         Text("NIK \(Text("*").foregroundColor(.red)) : ")
-                            //.bold()
-                        TextField("NIK", text: $NIK)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+
+                        TextField("NIK", text: $NIK.value)
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                            .keyboardType(.numberPad)
+                            .background(Utama).cornerRadius(5.0)
                         
                         Text("Nomor Rekening \(Text("*").foregroundColor(.red)) : ")
-                            //.bold()
-                        TextField("Nomor Rekening", text: $Rekening)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                        TextField("Nomor Rekening", text: $Rekening.value)
                             .padding()
-                            .background(lightGreyColor).cornerRadius(5.0)
+                            .font(Font.custom("Poppins-Regular", size: 14))
+                            .keyboardType(.numberPad)
+                            .background(Utama).cornerRadius(5.0)
                         
                         Spacer()
                     }
@@ -405,6 +421,7 @@ struct Confirmation : View {
                     
                     Text("Lanjut")
                         .bold()
+                        .font(Font.custom("Poppins-Regular", size: 14))
                         .foregroundColor(.white)
                 }
                 
